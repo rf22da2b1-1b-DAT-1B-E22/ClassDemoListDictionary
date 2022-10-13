@@ -11,6 +11,7 @@ namespace ClassDemoListDictionary
     {
 
         private readonly Dictionary<int, Kunde> _kunder;
+        
         public KundeKatalogDictionary()
         {
             _kunder = new Dictionary<int, Kunde>();
@@ -23,39 +24,45 @@ namespace ClassDemoListDictionary
         // Create
         public void Add(Kunde kunde)
         {
-            
+            _kunder.Add(kunde.KundeNummer, kunde);
         }
 
         // Read  - alle
         public List<Kunde> GetAll()
         {
-            // laver en kopi af dictionary
-            return new List<Kunde>();
+            // laver en kopi af dictionarys værdier
+            return new List<Kunde>(_kunder.Values);
         }
 
         // Read - en ud fra KundeNummer
         public Kunde GetByNumber(int kundeNummer)
         {
-            
-            return null;
+            return _kunder[kundeNummer];
         }
 
         // Read - en ud fra mobil nummer
         public Kunde GetByMobil(String mobil)
         {
+            foreach (Kunde k in _kunder.Values)
+            {
+                if (k.Mobil == mobil)
+                {
+                    return k;
+                }
+            }
             return null;
         }
 
         // Update
         public void Update(Kunde kunde)
         {
-            
+            _kunder[kunde.KundeNummer] = kunde;
         }
 
         // Delete
         public void Delete(Kunde kunde)
         {
-            
+            _kunder.Remove(kunde.KundeNummer);
         }
 
     }
